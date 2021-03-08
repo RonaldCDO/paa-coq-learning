@@ -1,0 +1,54 @@
+From Coq Require Import List Arith.
+
+Definition x := 10.
+
+Definition inc_nat (x : nat) : nat := x +1.
+
+Compute (1 + 1).
+
+Definition make_inc x y := x + y.
+
+Definition inc_2 := make_inc 2.
+Compute inc_2 3.
+
+Definition add_xy : nat := let x := 10 in
+                        let y := 20 in
+                        x + y.
+Compute add_xy.
+
+Definition is_zero (x : nat) :=
+    match x with
+    | 0 => true
+    | _ => false
+    end.
+    
+Definition A := 1.
+
+Compute is_zero A.
+
+Fixpoint factorial n := 
+    match n with
+    | 0 => 1
+    | (S n') => n * factorial n'
+    end.
+    
+Compute factorial (5).
+Compute factorial (2-1).
+
+Fixpoint is_even (n : nat) : bool := 
+    match n with
+    | 0 => true
+    | (S n) => is_odd n
+    end with
+      is_odd n := match n with
+      | 0 => false
+      | (S n) => is_even n
+      end.
+
+Compute is_even A.
+Compute is_odd A.
+
+Definition my_square : nat -> nat := fun x => x * x.
+Compute my_square 2.
+
+Definition my_id (A : Type) (x : A) : A := x.
